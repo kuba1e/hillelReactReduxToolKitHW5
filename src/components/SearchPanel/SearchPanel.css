@@ -1,0 +1,14 @@
+.btn.active {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.search-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.text-inputs {
+  width: 100%;
+}
