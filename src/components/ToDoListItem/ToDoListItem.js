@@ -1,46 +1,59 @@
 import React from "react";
+import { Checkbox, Box, ListItemText, IconButton } from "@mui/material";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDispatch } from "react-redux";
 import {
   toggleDone,
   toggleImportant,
   deleteToDo,
 } from "../../features/toDoList";
-import "./ToDoListItem.css";
 
 export const ToDoListItem = ({ toDo: { id, label, done, important } }) => {
   const dispatch = useDispatch();
-  let className = "todo-list-item";
-  let classNamesDone = done ? className + " done" : className;
-  let classNamesImp = important
-    ? classNamesDone + " important"
-    : classNamesDone;
-
   return (
-    <div className="item-content">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="flexCheckChecked"
+    <Box
+      sx={{
+        width: 1,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Checkbox
         defaultChecked={done}
         onClick={() => dispatch(toggleDone(id))}
       />
-      <span className={classNamesImp}>{label}</span>
-      <div className="btn-container">
-        <button
-          type="button"
-          className="btn btn-danger"
+      <ListItemText
+        sx={{
+          textDecoration: done ? "line-through" : "",
+          color: important ? "warning.main" : "",
+          px: 2,
+        }}
+        primary={label}
+      ></ListItemText>
+      <Box
+        sx={{
+          width: 1 / 6,
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
+        <IconButton
+          size="large"
+          color="error"
           onClick={() => dispatch(deleteToDo(id))}
         >
-          <i className="fa-solid fa-trash-can"></i>
-        </button>
-        <button
-          type="button"
-          className="btn btn-success"
+          <DeleteOutlineIcon />
+        </IconButton>
+        <IconButton
+          size="large"
+          color="warning"
           onClick={() => dispatch(toggleImportant(id))}
         >
-          <i className="fa-solid fa-triangle-exclamation"></i>
-        </button>
-      </div>
-    </div>
+          <PriorityHighIcon />
+        </IconButton>
+      </Box>
+    </Box>
   );
 };

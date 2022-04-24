@@ -1,8 +1,8 @@
 import React from "react";
+import { TextField, Box, ButtonGroup, Button } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux";
 import { filterToDos, searchToDos } from "../../features/toDoList";
-import "./SearchPanel.css";
 
 const buttons = [
   { id: 1, name: "all", label: "All" },
@@ -16,31 +16,36 @@ export const SearchPanel = () => {
   const searchValue = useSelector(({ toDos: { searchValue } }) => searchValue);
 
   const searchText = "Type here to search";
-  const classNames = "btn btn-outline-primary";
   const buttonsElements = buttons.map(({ id, name, label }) => {
     return (
-      <button
+      <Button
         key={id}
-        className={filterValue === name ? classNames + " active" : classNames}
+        color="primary"
+        variant={filterValue === name ? "contained" : "outlined"}
         onClick={() => dispatch(filterToDos(name))}
       >
         {label}
-      </button>
+      </Button>
     );
   });
 
   return (
-    <div className="search-panel">
-      <input
-        className="text-inputs"
-        type="text"
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <TextField
         placeholder={searchText}
+        label="Search todos"
+        fullWidth
         onChange={({ target }) => {
           dispatch(searchToDos(target.value));
         }}
         value={searchValue}
-      ></input>
-      <div className="btn-group">{buttonsElements}</div>
-    </div>
+      ></TextField>
+      <ButtonGroup>{buttonsElements}</ButtonGroup>
+    </Box>
   );
 };

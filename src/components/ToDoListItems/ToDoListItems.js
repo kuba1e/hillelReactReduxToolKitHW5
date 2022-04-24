@@ -1,7 +1,7 @@
 import React from "react";
+import { List, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 import ToDoListItem from "../ToDoListItem";
-import "./ToDoListItems.css";
 
 export const ToDoListItems = () => {
   const toDosData = useSelector(({ toDos: { toDosData } }) => toDosData);
@@ -26,11 +26,11 @@ export const ToDoListItems = () => {
 
   const elements = preparedToDos.map((toDo) => {
     return (
-      <li key={toDo.id} className="list-group-item">
+      <ListItem key={toDo.id} dense divider>
         <ToDoListItem toDo={toDo} />
-      </li>
+      </ListItem>
     );
   });
 
-  return <ul className="list-group todo-list-items">{elements}</ul>;
+  return <List>{elements}</List>;
 };
