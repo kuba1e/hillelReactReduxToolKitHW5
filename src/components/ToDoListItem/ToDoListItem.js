@@ -20,10 +20,7 @@ export const ToDoListItem = ({ toDo: { id, label, done, important } }) => {
         alignItems: "center",
       }}
     >
-      <Checkbox
-        defaultChecked={done}
-        onClick={() => dispatch(toggleDone(id))}
-      />
+      <Checkbox checked={done} onClick={() => dispatch(toggleDone(id))} />
       <ListItemText
         sx={{
           textDecoration: done ? "line-through" : "",

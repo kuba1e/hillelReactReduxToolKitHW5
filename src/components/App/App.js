@@ -42,7 +42,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Secular+One",
-    fontSize: 18,
+    fontSize: 16,
   },
 });
 
